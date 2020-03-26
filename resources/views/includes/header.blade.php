@@ -1,3 +1,3 @@
 <nav class = "header" >
-    <h1 class = "main-title">Їдальна камяницької школи</h1>
+    <h1 class = "main-title">Їдальня камяницької школи</h1>
 </nav>

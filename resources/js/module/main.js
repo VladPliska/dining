@@ -29,3 +29,17 @@ $(document).on('click', '.countDown', function () {
 $(document).on('click','.remove-dish',function(){
     $(this).parent().remove();
 });
+
+$(document).on('click','.createShow',function(){
+    $('.create-new-dish').removeAttr('hidden');
+    $('.all-dish-edit').attr('hidden','');
+});
+
+$(document).on('click','.editShow',function(){
+    $('.create-new-dish').attr('hidden','');
+    $('.all-dish-edit').removeAttr('hidden');
+})
+
+$(document).on('click','.search-edit',function(){
+    $(this).toggleClass('active');
+})

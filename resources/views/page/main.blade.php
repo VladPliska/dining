@@ -1,7 +1,12 @@
 @include('includes/head')
 
 @include(    'includes/header')
-
+<div class="setting">
+    <a href="/admin">
+        <i class="fas fa-cog"></i>
+    Налаштування
+    </a>
+</div>
 <h1 class="menu-title">Меню</h1>
 <div class="main">
     <span title="Інгрідієнти:.....">

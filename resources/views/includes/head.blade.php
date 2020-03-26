@@ -11,6 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Baloo+2|Montserrat&display=swap" rel="stylesheet">
     <script src="js/app.js"></script>
+    <script src="https://kit.fontawesome.com/71de464d86.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href='css/app.css'>
 
 

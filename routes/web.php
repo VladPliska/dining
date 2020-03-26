@@ -12,3 +12,6 @@ Route::get('/order', function () {
 Route::get('/login', function () {
     return view('page.login');
 });
+Route::get('/admin', function () {
+    return view('page.admin');
+});
