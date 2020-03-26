@@ -9,3 +9,6 @@ Route::get('/', function () {
 Route::get('/order', function () {
     return view('page.order');
 });
+Route::get('/login', function () {
+    return view('page.login');
+});

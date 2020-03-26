@@ -168,3 +168,54 @@ body {
   width: 350px;
 }
 
+.login-container {
+  border: 1px solid;
+  border-radius: 10px;
+  box-shadow: 3px 4px 40px black;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-container .title-login {
+  font-size: 35px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-container .auth-form {
+  font-size: 25px;
+  position: relative;
+  text-align: center;
+  top: 10%;
+}
+
+.login-container .auth-form input {
+  outline: unset;
+  border: none;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.login-container .auth-form .login-btn {
+  margin-top: 20px;
+  width: 300px;
+  background: none;
+  font-size: 25px;
+  padding: 10px;
+  border-radius: 30px;
+  border: 2px solid #12909f;
+  text-align: center;
+  cursor: pointer;
+}
+
+.login-container .auth-form .login-btn:hover {
+  border: 2px solid #11D0DF;
+  background: #0C9A9A;
+}
+
