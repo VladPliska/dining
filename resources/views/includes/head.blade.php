@@ -14,6 +14,7 @@
     <script src="https://kit.fontawesome.com/71de464d86.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href='css/app.css'>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 </head>

@@ -15,3 +15,5 @@ Route::get('/login', function () {
 Route::get('/admin', function () {
     return view('page.admin');
 });
+
+Route::post('/createNewDish','MainController@addDish');
