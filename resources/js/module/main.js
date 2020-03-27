@@ -30,6 +30,7 @@ $(document).on('click','.remove-dish',function(){
     $(this).parent().remove();
     if($('.content').children().length == 0){
         $('.submitOrder').remove();
+        location.reload();
     }
 });
 
@@ -78,4 +79,8 @@ $(document).on('click','.confirm-order',function(){
     }
 
 
+});
+
+$(document).on('click','.submitOrder',function () {
+    $('.btnSubmit').trigger('click');
 });

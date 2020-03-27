@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Console\Input\Input;
 use App\Models\Menu;
+use Symfony\Component\Console\Input\Input;
 
 class MainController extends Controller
 {
@@ -65,6 +65,29 @@ class MainController extends Controller
          return response()->json([
              'view'=>$view
          ]);
+    }
+
+    public function submitOrder(Request $req){
+        $allData =$req->input();
+        $id = [];
+        $allPrice = 0;
+
+        foreach($allData as $k => $v){
+          if($k == '_token'){
+              continue;
+          }
+            array_push($id,$v);
+        }
+
+        $allDish = Menu::whereIn('id',$id)->get();
+
+        foreach($allDish as $val){
+            $allPrice += $val->price;
+        }
+
+        dd($allPrice);
+
+        return view('page.main');
     }
 }
 

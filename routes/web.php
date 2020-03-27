@@ -16,3 +16,5 @@ Route::get('/','MainController@index');
 Route::post('/createNewDish','MainController@addDish');
 
 Route::post('/createOrder','MainController@createOrder');
+
+Route::post('/submitOrder','MainController@submitOrder');

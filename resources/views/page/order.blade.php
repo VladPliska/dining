@@ -11,29 +11,34 @@
             <div class="remove-title">Видалити страву</div>
         </div>
         <div class="content">
-            @foreach($order as $v)
-            <div class="order-item">
-                <div class ="img-dish">
-                    <img src="./storage/Image/{{$v->img}}" alt="Фото страви">
-                </div>
-                <div class="name-dish">{{$v->name}}</div>
-                <span class="description-dish" title="{{$v->ingredients}}">{{$v->ingredients}}</span>
-                <div class="count-dish" onmousedown="return false" onselectstart="return false">
-                    <span class="countUp">+</span>
-                    <span class="count">1</span>
-                    <span class="countDown">-</span>
-                </div>
-                <div class="price" data-price={{$v->price}}>{{$v->price}}</div>
-                <div class="remove-dish">X</div>
-            </div>
-            @endforeach
+            <form action="/submitOrder" method="POST">
+                @csrf
+                @foreach($order as $v)
+                    <input type="text" hidden value="{{$v->id}}" name="data-{{$v->id}}">
+                    <div class="order-item">
+                        <div class="img-dish">
+                            <img src="./storage/Image/{{$v->img}}" alt="Фото страви">
+                        </div>
+                        <div class="name-dish">{{$v->name}}</div>
+                        <span class="description-dish" title="{{$v->ingredients}}">{{$v->ingredients}}</span>
+                        <div class="count-dish" onmousedown="return false" onselectstart="return false">
+                            <span class="countUp">+</span>
+                            <span class="count">1</span>
+                            <span class="countDown">-</span>
+                        </div>
+                        <div class="price" data-price={{$v->price}}>{{$v->price}}</div>
+                        <div class="remove-dish">X</div>
+                    </div>
+                @endforeach
+                <input type="submit" class="btnSubmit" style="display:none">
+            </form>
 
         </div>
 
-</div>
+    </div>
 </div>
 <div class="btn submitOrder">
-        Підтвердити замовлення
+    Підтвердити замовлення
 </div>
 
 @include('.includes/footer')
