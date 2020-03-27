@@ -28,11 +28,15 @@ $(document).on('click', '.countDown', function () {
 
 $(document).on('click','.remove-dish',function(){
     $(this).parent().remove();
+    if($('.content').children().length == 0){
+        $('.submitOrder').remove();
+    }
 });
 
 $(document).on('click','.createShow',function(){
     $('.create-new-dish').removeAttr('hidden');
     $('.all-dish-edit').attr('hidden','');
+
 });
 
 $(document).on('click','.editShow',function(){
@@ -48,3 +52,30 @@ $(document).on('click','.search-edit',function(){
        $('.new-img').attr('src',URL.createObjectURL(a));
     })
 
+$(document).on('click','.confirm-order',function(){
+    let data = $('.main').find('.active');
+    if(data.length == 0){
+        alert('Виберіть декілька страв для створення замовлення');
+    }else{
+        let dishId =[];
+        for(let i of data){
+            dishId.push(parseInt(i.getAttribute('data-id')));
+        }
+        $.ajax({
+            type:'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url:'/createOrder',
+            data:{
+                dishId
+            },
+            success:function(res){
+                $('body').html(res.view);
+                // document.location.href = '/order'
+            }
+        })
+    }
+
+
+});

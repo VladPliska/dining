@@ -19281,6 +19281,12 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./module/main */ "./resources/js/module/main.js");
@@ -19326,6 +19332,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 $(document).on('click', '.dish-item', function () {
   $(this).toggleClass('active');
 });
@@ -19354,6 +19366,10 @@ $(document).on('click', '.countDown', function () {
 });
 $(document).on('click', '.remove-dish', function () {
   $(this).parent().remove();
+
+  if ($('.content').children().length == 0) {
+    $('.submitOrder').remove();
+  }
 });
 $(document).on('click', '.createShow', function () {
   $('.create-new-dish').removeAttr('hidden');
@@ -19369,6 +19385,43 @@ $(document).on('click', '.search-edit', function () {
 $(document).on('change', '#add-photo', function () {
   var a = document.getElementById('add-photo').files[0];
   $('.new-img').attr('src', URL.createObjectURL(a));
+});
+$(document).on('click', '.confirm-order', function () {
+  var data = $('.main').find('.active');
+
+  if (data.length == 0) {
+    alert('Виберіть декілька страв для створення замовлення');
+  } else {
+    var dishId = [];
+
+    var _iterator = _createForOfIteratorHelper(data),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var i = _step.value;
+        dishId.push(parseInt(i.getAttribute('data-id')));
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: '/createOrder',
+      data: {
+        dishId: dishId
+      },
+      success: function success(res) {
+        $('body').html(res.view); // document.location.href = '/order'
+      }
+    });
+  }
 });
 
 /***/ }),

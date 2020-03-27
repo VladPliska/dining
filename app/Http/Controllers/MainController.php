@@ -17,6 +17,7 @@ class MainController extends Controller
         $price = $req->get('price');
         $weight = $req->get('weight');
 
+
         if (empty($name)) {
             return back()->withErrors(['Введіть назву']);
         }
@@ -44,8 +45,26 @@ class MainController extends Controller
         ]);
 
 
-        return view('page/admin');
+        return view('page/admin',['success'=>true]);
 
 
     }
+
+    public function index(Request $req){
+        $data = Menu::all();
+        return view('page/main',compact('data'));
+    }
+    public function createOrder(Request $req){
+
+        $data = $req->get('dishId');
+
+        $order = Menu::whereIn('id',$data)->get();
+
+        $view = view('page.order',compact('order'))->render();
+
+         return response()->json([
+             'view'=>$view
+         ]);
+    }
 }
+

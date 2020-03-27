@@ -74,6 +74,8 @@ body {
 
             img {
                 border-radius: 10px;
+                width: 350px;
+                height: 200px;
             }
 
             //.price-dish{
@@ -126,7 +128,9 @@ body {
     }
 
     .order-item {
-        //border: 1px solid;
+        border: 1px solid #b68e48;
+        margin: 10px 0;
+        border-radius: 10px;
         height: 150px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -139,6 +143,8 @@ body {
             img {
                 margin: 10px;
                 border-radius: 10px;
+                width: 200px;
+                height: 130px;
             }
 
             //border: 1px solid;

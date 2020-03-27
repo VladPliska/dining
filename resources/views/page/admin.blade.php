@@ -10,13 +10,14 @@
         <h2 class="create-icon editShow">Редагувати страву</h2>
     </div>
 </div>
+{{--@dd($errors->all()[0])--}}
 <div class="create-new-dish">
     <form action="/createNewDish" method="POST" enctype="multipart/form-data">
         @csrf
         <h1 class="create-title">Створення нової страви</h1>
         <div class="main-create">
             <div class="left-content">
-                <input id='add-photo' type='file' hidden accept="image/*" name="img" >
+                <input id='add-photo' type='file' hidden accept="image/*" name="img">
                 <img src="https://picsum.photos/450/300" alt="test" class="new-img"><br>
                 <label for="add-photo" class="btnAddPhoto">Додати фотографію</label><br><br>
                 <label for='name-dish'>Введіть назву страви</label><br>
@@ -25,12 +26,12 @@
             <div class="right-content">
                 <div class="price">
                     <label for="create-price">Вкажіть ціну</label><br>
-                    <input type="text" id="create-price" placeholder="Ціна" name="price">
+                    <input type="number" id="create-price" placeholder="Ціна" name="price">
                 </div>
                 <br>
                 <div class="weight">
                     <label for="create-weight">Вкажіть вагу порції(г)</label><br>
-                    <input type="text" id="create-weight" placeholder="Вага" name="weight">
+                    <input type="number" id="create-weight" placeholder="Вага" name="weight">
                 </div>
                 <div class="descriprion">
                     <label for="create-descript">Вкажіть інгрідієнти</label><br>
@@ -38,9 +39,15 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn createDish">Створити</button>
+            <button type="submit" class="btn createDish">Створити</button>
     </form>
 </div>
+@if(!empty($errors->all()))
+    <h2 class="err-msg">{{$errors->all()[0]}}</h2>
+@endif
+@if(!empty($success))
+    <h2 class="success">Страву успішно додано</h2>
+@endif
 <div class="all-dish-edit" hidden>
     <div class="search-edit">
         <input type="text" class="searchInEdit" placeholder="Введіть назву страви для пошуку">

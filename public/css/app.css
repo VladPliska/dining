@@ -79,6 +79,8 @@ body::-webkit-scrollbar {
 
 .main .dish-item .content-item img {
   border-radius: 10px;
+  width: 350px;
+  height: 200px;
 }
 
 .main .dish-item:hover {
@@ -123,6 +125,9 @@ body::-webkit-scrollbar {
 }
 
 .order-content .order-item {
+  border: 1px solid #b68e48;
+  margin: 10px 0;
+  border-radius: 10px;
   height: 150px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -135,6 +140,8 @@ body::-webkit-scrollbar {
 .order-content .order-item .img-dish img {
   margin: 10px;
   border-radius: 10px;
+  width: 200px;
+  height: 130px;
 }
 
 .order-content .order-item div {
@@ -351,13 +358,17 @@ textarea {
 }
 
 .toggleButton h2 {
-  transition: all 1.7s ease;
+  transition: all 1s ease;
   white-space: nowrap;
   width: 0;
   overflow: hidden;
   padding: 0;
   margin: 0;
   font-size: 20px;
+}
+
+.toggleButton h2:hover {
+  color: rgba(254, 226, 37, 0.58);
 }
 
 .all-dish-edit {
@@ -444,5 +455,19 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.err-msg,
+.success {
+  color: #ff570a;
+  position: absolute;
+  bottom: 5%;
+  left: 41%;
+}
+
+.success {
+  color: cyan;
+  width: 100%;
+  left: 38%;
 }
 

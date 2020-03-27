@@ -1,6 +1,6 @@
 @include('includes/head')
 
-@include(    'includes/header')
+@include('includes/header')
 <div class="setting">
     <a href="/admin">
         <i class="fas fa-cog"></i>
@@ -9,51 +9,17 @@
 </div>
 <h1 class="menu-title">Меню</h1>
 <div class="main">
-    <span title="Інгрідієнти:.....">
-        <div class="dish-item">
+    @foreach($data as $v)
+        <span title="Інгрідієнти:{{$v->ingredients}}">
+        <div class="dish-item" data-id="{{$v->id}}">
             <div class="content-item">
-                <img src="https://picsum.photos/350/200" alt="test.img" class="img-dish">
-                <div class="about-dish">Назва страви</div>
-                <div class="price-dish">1000</div>
+                <img src="./storage/Image/{{$v->img}}" alt="Фото страви" class="img-dish">
+                <div class="about-dish">{{$v->name}}</div>
+                <div class="price-dish">{{$v->price}} грн.</div>
             </div>
         </div>
     </span>
-    <span title="Інгрідієнти:.....">
-        <div class="dish-item">
-            <div class="content-item">
-                <img src="https://picsum.photos/350/200" alt="test.img" class="img-dish">
-                <div class="about-dish">Назва страви</div>
-                <div class="price-dish">1000</div>
-            </div>
-        </div>
-    </span>
-    <span title="Інгрідієнти:.....">
-        <div class="dish-item">
-            <div class="content-item">
-                <img src="https://picsum.photos/350/200" alt="test.img" class="img-dish">
-                <div class="about-dish">Назва страви</div>
-                <div class="price-dish">1000</div>
-            </div>
-        </div>
-    </span>
-    <span title="Інгрідієнти:.....">
-        <div class="dish-item">
-            <div class="content-item">
-                <img src="https://picsum.photos/350/200" alt="test.img" class="img-dish">
-                <div class="about-dish">Назва страви</div>
-                <div class="price-dish">1000</div>
-            </div>
-        </div>
-    </span>
-    <span title="Інгрідієнти:.....">
-        <div class="dish-item">
-            <div class="content-item">
-                <img src="https://picsum.photos/350/200" alt="test.img" class="img-dish">
-                <div class="about-dish">Назва страви</div>
-                <div class="price-dish">1000</div>
-            </div>
-        </div>
-    </span>
+    @endforeach
 </div>
 <div class="confirm-order btn">
     Замовити
