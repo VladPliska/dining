@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Menu;
 use Symfony\Component\Console\Input\Input;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class MainController extends Controller
 {
@@ -85,9 +88,26 @@ class MainController extends Controller
             $allPrice += $val->price;
         }
 
-        dd($allPrice);
+        $order = Orders::create([
+            'dish_id' =>$allDish[0]->id,
+            'count' => $allPrice
+        ]);
 
-        return view('page.main');
+        $pdfBody = view('includes/for-pdf',['content'=>$allDish])->render();
+
+        $data = [
+            'title' => 'Чек - Їдальня кам\'яницької школи',
+            'header' => 'Чек #' . $order->id .'Термін дії'.$order->created_at,
+            'content' => $pdfBody,
+            'price' =>$allPrice,
+            ];
+
+        $pdf = PDF::loadView('pdf_view', $data);
+        return $pdf->download('Чек #'.$order->id.'.pdf');
+
+//        dd($allPrice);
+//
+//        return view('page.main');
     }
 }
 
