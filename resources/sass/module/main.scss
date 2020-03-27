@@ -6,7 +6,11 @@ body {
     background: linear-gradient(to right, #5f2c82, #49a09d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-family: 'Baloo 2', 'Montserrat', cursive;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: unset;
+    &::-webkit-scrollbar{
+        width: 0;
+    }
 }
 
 

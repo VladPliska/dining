@@ -19366,6 +19366,10 @@ $(document).on('click', '.editShow', function () {
 $(document).on('click', '.search-edit', function () {
   $(this).toggleClass('active');
 });
+$(document).on('change', '#add-photo', function () {
+  var a = document.getElementById('add-photo').files[0];
+  $('.new-img').attr('src', URL.createObjectURL(a));
+});
 
 /***/ }),
 

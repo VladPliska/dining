@@ -8,7 +8,12 @@ body {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-family: "Baloo 2", "Montserrat", cursive;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: unset;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
 }
 
 .header h1 {
@@ -357,7 +362,6 @@ textarea {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid;
 }
 
 .all-dish-edit .active {

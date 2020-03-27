@@ -10,13 +10,13 @@
         <h2 class="create-icon editShow">Редагувати страву</h2>
     </div>
 </div>
-<div class="create-new-dish" hidden >
+<div class="create-new-dish">
     <h1 class="create-title">Створення нової страви</h1>
     <div class="main-create">
 
         <div class="left-content">
-            <input id='add-photo' type='file' hidden>
-            <img src="https://picsum.photos/450/300" alt="test"><br>
+            <input id='add-photo' type='file' hidden  accept="image/*" >
+            <img src="https://picsum.photos/450/300" alt="test" class="new-img"><br>
             <label for="add-photo" class="btnAddPhoto">Додати фотографію</label><br><br>
             <label for='name-dish'>Введіть назву страви</label><br>
             <input id="name-dish" type="text" name="name" placeholder="Введіть назву">
@@ -39,7 +39,7 @@
     </div>
     <button type="submit" class="btn createDish">Створити</button>
 </div>
-<div class="all-dish-edit">
+<div class="all-dish-edit" hidden>
     <div class="search-edit">
         <input type="text" class="searchInEdit" placeholder="Введіть назву страви для пошуку">
         <i class="fas fa-search"></i>
@@ -54,6 +54,60 @@
                 <div class="remove-title">Видалити страву</div>
             </div>
             <div class="content">
+                <div class="admin-order-item">
+                    <div class ="img-dish">
+                        <img src="https://picsum.photos/200/130" alt="">
+                    </div>
+                    <div class="name-dish">Name</div>
+                    <span class="description-dish" title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
+                    <div class="weight">100</div>
+                    <div class="admin-remove-dish">X</div>
+                </div>
+                <div class="admin-order-item">
+                    <div class ="img-dish">
+                        <img src="https://picsum.photos/200/130" alt="">
+                    </div>
+                    <div class="name-dish">Name</div>
+                    <span class="description-dish" title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
+                    <div class="weight">100</div>
+                    <div class="admin-remove-dish">X</div>
+                </div>
+                <div class="admin-order-item">
+                    <div class ="img-dish">
+                        <img src="https://picsum.photos/200/130" alt="">
+                    </div>
+                    <div class="name-dish">Name</div>
+                    <span class="description-dish" title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
+                    <div class="weight">100</div>
+                    <div class="admin-remove-dish">X</div>
+                </div>
+                <div class="admin-order-item">
+                    <div class ="img-dish">
+                        <img src="https://picsum.photos/200/130" alt="">
+                    </div>
+                    <div class="name-dish">Name</div>
+                    <span class="description-dish" title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
+                    <div class="weight">100</div>
+                    <div class="admin-remove-dish">X</div>
+                </div>
+                <div class="admin-order-item">
+                    <div class ="img-dish">
+                        <img src="https://picsum.photos/200/130" alt="">
+                    </div>
+                    <div class="name-dish">Name</div>
+                    <span class="description-dish" title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
+                    <div class="weight">100</div>
+                    <div class="admin-remove-dish">X</div>
+                </div>
+                <div class="admin-order-item">
+                    <div class ="img-dish">
+                        <img src="https://picsum.photos/200/130" alt="">
+                    </div>
+                    <div class="name-dish">Name</div>
+                    <span class="description-dish" title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
+                    <div class="weight">100</div>
+                    <div class="admin-remove-dish">X</div>
+                </div>
                 <div class="admin-order-item">
                     <div class ="img-dish">
                         <img src="https://picsum.photos/200/130" alt="">
