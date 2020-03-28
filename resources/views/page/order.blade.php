@@ -14,8 +14,8 @@
             <form action="/submitOrder" method="POST">
                 @csrf
                 @foreach($order as $v)
-                    <input type="text" hidden value="{{$v->id}}" name="data-{{$v->id}}">
                     <div class="order-item">
+                        <input type="text" hidden value="{{$v->id}}" name="data-{{$v->id}}">
                         <div class="img-dish">
                             <img src="./storage/Image/{{$v->img}}" alt="Фото страви">
                         </div>
@@ -25,6 +25,7 @@
                             <span class="countUp">+</span>
                             <span class="count">1</span>
                             <span class="countDown">-</span>
+                            <input type="number" class="countVal" hidden name='count-{{$v->id}}' value="1">
                         </div>
                         <div class="price" data-price={{$v->price}}>{{$v->price}}</div>
                         <div class="remove-dish">X</div>

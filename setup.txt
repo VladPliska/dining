@@ -1,1 +1,2 @@
 composer require barryvdh/laravel-dompdf
+'ALTER TABLE "orders" ADD "order_id" integer'

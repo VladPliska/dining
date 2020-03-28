@@ -1,32 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>{{ $title }}</title>
-    <style>
-        .content {
-            width: 90%;
+    <title>Чек</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    @font-face {
+      font-family: myFirstFont;
+      src: url('../../public/fonts/arialuni.ttf');
+    }
+    body{
+        font-family: myFirstFont;
+    }
+        .box {
+            width: 600px;
             margin: 0 auto;
-        }
-
-        .dish {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-            text-align: center;
-        }
-
-        .dish div {
-            display: flex;
-            align-items: center;
         }
     </style>
 </head>
-
 <body>
-<h2>{{$header}}</h2>
-<div class="content">
-    {!! $content !!}
+<br/>
+<div class="container">
+    <h3 align="center">{{$data['header']}}</h3><br/>
+    <br/>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>Count</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($data['content'] as $k => $v)
+                <tr>
+                    <td>{{$k+1}}</td>
+                    <td>{{$v->name}}</td>
+                    <td>{{$v->weight}}</td>
+                    <td>1</td>
+                    <td>{{$v->price}}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
-
 </body>
 </html>

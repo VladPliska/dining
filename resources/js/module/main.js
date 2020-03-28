@@ -10,6 +10,8 @@ $(document).on('click', '.countUp', function () {
     let price = parseInt(elPrice.text());
     priceDish = parseInt(priceDish);
     el.text(count + 1);
+
+    $(this).parent().find('.countVal').attr('value',count+1);
     elPrice.text(price + priceDish);
 })
 
@@ -22,6 +24,7 @@ $(document).on('click', '.countDown', function () {
     priceDish = parseInt(priceDish);
     if (count != 1) {
         el.text(count - 1);
+        $(this).parent().find('.countVal').attr('value',count-1);
         elPrice.text(price - priceDish);
     }
 })

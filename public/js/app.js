@@ -19349,6 +19349,7 @@ $(document).on('click', '.countUp', function () {
   var price = parseInt(elPrice.text());
   priceDish = parseInt(priceDish);
   el.text(count + 1);
+  $(this).parent().find('.countVal').attr('value', count + 1);
   elPrice.text(price + priceDish);
 });
 $(document).on('click', '.countDown', function () {
@@ -19361,6 +19362,7 @@ $(document).on('click', '.countDown', function () {
 
   if (count != 1) {
     el.text(count - 1);
+    $(this).parent().find('.countVal').attr('value', count - 1);
     elPrice.text(price - priceDish);
   }
 });

@@ -6,6 +6,7 @@ use App\models\Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Menu;
+use PHPUnit\Exception;
 use Symfony\Component\Console\Input\Input;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -72,20 +73,38 @@ class MainController extends Controller
 
     public function submitOrder(Request $req){
         $allData =$req->input();
+        $data =[];
+        $count = [];
         $id = [];
         $allPrice = 0;
 
-        foreach($allData as $k => $v){
-          if($k == '_token'){
-              continue;
-          }
-            array_push($id,$v);
+        foreach ($allData as $k =>$v){
+            if($k == '_token'){
+                continue;
+            }
+            if($k[0] == 'd'){
+                array_push($data,$v);
+            }
+            if($k[0] == 'c'){
+                array_push($count,$v);
+            }
         }
 
-        $allDish = Menu::whereIn('id',$id)->get();
+//    dd($data);
 
-        foreach($allDish as $val){
-            $allPrice += $val->price;
+        $allDish = Menu::whereIn('id',$data)->get();
+
+        dd($allDish);
+
+            foreach($allDish as $val){
+                $allPrice += $val->price;
+            }
+
+        $ordersId = Orders::orderBy('order_id','desc')->limit(1)->get();
+        if(count($ordersId) == 0){
+           $ordersId = 1;
+        }else{
+            $ordersId += 1;
         }
 
         $order = Orders::create([
@@ -93,16 +112,17 @@ class MainController extends Controller
             'count' => $allPrice
         ]);
 
-        $pdfBody = view('includes/for-pdf',['content'=>$allDish])->render();
+//        $pdfBody = view('pdf',compact($data))->render();
 
         $data = [
             'title' => 'Чек - Їдальня кам\'яницької школи',
             'header' => 'Чек #' . $order->id .'Термін дії'.$order->created_at,
-            'content' => $pdfBody,
+            'content' => $allDish,
             'price' =>$allPrice,
             ];
 
-        $pdf = PDF::loadView('pdf_view', $data);
+//        dd($data['content']);
+        $pdf = PDF::loadView('pdf_view', ['data' => $data]);
         return $pdf->download('Чек #'.$order->id.'.pdf');
 
 //        dd($allPrice);
