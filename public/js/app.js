@@ -19338,6 +19338,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+window.onload = function () {
+  if (location.pathname === '/createNewDish' || location.pathname === '/editDish') {
+    window.history.replaceState(null, null, location.origin + '/admin');
+  }
+};
+
 $(document).on('click', '.dish-item', function () {
   $(this).toggleClass('active');
 });
@@ -19375,10 +19381,15 @@ $(document).on('click', '.remove-dish', function () {
   }
 });
 $(document).on('click', '.createShow', function () {
+  if ($('.create-new-dish').find('form').attr('action') == '/editDish') {
+    location.reload();
+  }
+
   $('.create-new-dish').removeAttr('hidden');
   $('.all-dish-edit').attr('hidden', '');
 });
 $(document).on('click', '.editShow', function () {
+  $('.msg').attr('hidden', '');
   $('.create-new-dish').attr('hidden', '');
   $('.all-dish-edit').removeAttr('hidden');
 });
@@ -19428,6 +19439,48 @@ $(document).on('click', '.confirm-order', function () {
 });
 $(document).on('click', '.submitOrder', function () {
   $('.btnSubmit').trigger('click');
+});
+$(document).on('click', '.admin-remove-dish', function (e) {
+  var id = $(this).parent().attr('data-id');
+  var curr = $(this).parent();
+  var a = confirm('Видалити страву?');
+
+  if (a) {
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: 'remove-dish',
+      data: {
+        'id': id
+      },
+      success: function success(res) {
+        if (res.removed) {
+          curr.remove();
+          alert('Страву успішно видалено');
+        } else {
+          alert('Помилка.Спробуйте пізніше');
+        }
+      }
+    });
+  }
+});
+$(document).on('click', '.editDish', function (e) {
+  if (!$(e.target).hasClass('admin-remove-dish')) {
+    var id = $(this).attr('data-id');
+    var data = JSON.parse($('.info-' + id).text());
+    $('.create-new-dish').find('form').attr('action', '/editDish');
+    $('.all-dish-edit').attr('hidden', '');
+    $('.create-new-dish').removeAttr('hidden');
+    $('.left-content').find('img').attr('src', './storage/Image/' + data.img);
+    $('#name-dish').val(data.name);
+    $('#create-price').val(data.price);
+    $('#create-weight').val(data.weight);
+    $('#create-descript').val(data.ingredients);
+    $('.createDish').text('Редагувати');
+    $('.id-dish').val(id);
+  }
 });
 
 /***/ }),

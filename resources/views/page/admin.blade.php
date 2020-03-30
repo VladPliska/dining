@@ -15,6 +15,7 @@
     <form action="/createNewDish" method="POST" enctype="multipart/form-data">
         @csrf
         <h1 class="create-title">Створення нової страви</h1>
+        <input type="hidden" value="null" class="id-dish" name="id">
         <div class="main-create">
             <div class="left-content">
                 <input id='add-photo' type='file' hidden accept="image/*" name="img">
@@ -43,10 +44,10 @@
     </form>
 </div>
 @if(!empty($errors->all()))
-    <h2 class="err-msg">{{$errors->all()[0]}}</h2>
+    <h2 class="err-msg msg">{{$errors->all()[0]}}</h2>
 @endif
 @if(!empty($success))
-    <h2 class="success">Страву успішно додано</h2>
+    <h2 class="success msg">Страву успішно додано</h2>
 @endif
 <div class="all-dish-edit" hidden>
     <div class="search-edit">
@@ -63,76 +64,30 @@
                 <div class="remove-title">Видалити страву</div>
             </div>
             <div class="content">
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
+                @foreach($allMenu as $k =>$v)
+                    <div class="admin-order-item editDish" style="margin-top:25px" data-id="{{$v->id}}">
+                        <div class="img-dish">
+                            <img src="./storage/Image/{{$v->img}}" width="200" height="130" alt="">
+                        </div>
+                        <div class="name-dish">{{$v->name}}</div>
+                        <span class="description-dish"
+                              title="{{$v->ingredients}}">{{$v->ingredients}}</span>
+                        <div class="weight">{{$v->weight}}</div>
+                        <div class="admin-remove-dish">X</div>
+                        <span hidden class="info-{{$v->id}}">
+                            {{json_encode([
+                                    'name'=>$v->name,
+                                    'ingredients' =>$v->ingredients,
+                                    'weight'=>$v->weight,
+                                    'price' => $v->price,
+                                    'img'=>$v->img
+                             ])}}
+                        </span>
                     </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
-                    </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
-                    </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
-                    </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
-                    </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
-                    </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
-                <div class="admin-order-item">
-                    <div class="img-dish">
-                        <img src="https://picsum.photos/200/130" alt="">
-                    </div>
-                    <div class="name-dish">Name</div>
-                    <span class="description-dish"
-                          title="asdasdasd asd a sd as d as d as d as d asd as d as d asd as d as d as d asd  asdasd">Test textasdasdasdasdsadasdasd asda s asd as as dasd asd asdasd asd asd</span>
-                    <div class="weight">100</div>
-                    <div class="admin-remove-dish">X</div>
-                </div>
+                @endforeach
+
+
+
             </div>
         </div>
     </div>
