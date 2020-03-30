@@ -267,6 +267,14 @@ a {
   padding: 20px;
 }
 
+.ce {
+  font-size: 50px;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
 input,
 textarea {
   outline: unset;

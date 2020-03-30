@@ -8,5 +8,9 @@ class Orders extends Model
 {
     protected $table ='orders';
 
-    protected $fillable =['dish_id','count','order_id'];
+    protected $fillable =['menu_id','count','order_id','created_at','updated_at'];
+
+    function getDish(){
+        return $this->belongsTo('App\Models\Menu','menu_id');
+    }
 }

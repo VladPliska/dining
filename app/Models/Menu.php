@@ -11,4 +11,8 @@ class Menu extends Model
     protected $fillable = [
         'name','img','ingredients','price','weight'
     ];
+
+    public function dishData(){
+        return $this->hasMany('App\Models\Orders');
+    }
 }

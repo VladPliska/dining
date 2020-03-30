@@ -15,9 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('dish_id');
+            $table->integer('menu_id');
             $table->integer('count');
+            $table->integer('order_id');
+
+            $table->foreign('menu_id')->references('id')->on('menu');
+
             $table->timestamps();
+
         });
     }
 

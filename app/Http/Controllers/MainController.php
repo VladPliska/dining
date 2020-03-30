@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Orders;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Menu;
@@ -75,8 +76,10 @@ class MainController extends Controller
         $allData =$req->input();
         $data =[];
         $count = [];
-        $id = [];
+        $info = [];
         $allPrice = 0;
+        $everyoneOneDishPrice = [];
+
 
         foreach ($allData as $k =>$v){
             if($k == '_token'){
@@ -90,40 +93,56 @@ class MainController extends Controller
             }
         }
 
-//    dd($data);
 
         $allDish = Menu::whereIn('id',$data)->get();
 
-        dd($allDish);
+        foreach($allDish as $k => $v){
+            $price = $v->price * $count[$k];
+            array_push($everyoneOneDishPrice,$price);
+        }
 
-            foreach($allDish as $val){
-                $allPrice += $val->price;
+            foreach($everyoneOneDishPrice as $val){
+                $allPrice += $val;
             }
 
         $ordersId = Orders::orderBy('order_id','desc')->limit(1)->get();
         if(count($ordersId) == 0){
            $ordersId = 1;
-        }else{
-            $ordersId += 1;
+        }else {
+            $ordersId = $ordersId[0]->order_id + 1;
         }
 
-        $order = Orders::create([
-            'dish_id' =>$allDish[0]->id,
-            'count' => $allPrice
-        ]);
+        $now = Carbon::now('EEST');
+
+        foreach($allDish as $k => $v){
+                array_push($info,
+                    [
+                   'menu_id' => $data[$k],
+                   'count' =>$count[$k],
+                   'order_id' => $ordersId,
+                   'created_at' => $now,
+                   'updated_at' => $now
+
+               ]);
+        }
+
+        $order = Orders::insert($info);
+
+        $orderInfo = Orders::where('order_id',$ordersId)->get();
 
 //        $pdfBody = view('pdf',compact($data))->render();
 
         $data = [
             'title' => 'Чек - Їдальня кам\'яницької школи',
-            'header' => 'Чек #' . $order->id .'Термін дії'.$order->created_at,
-            'content' => $allDish,
+            'num' => $ordersId,
+            'date' => $now,
+            'content' => $orderInfo,
+            'count' =>$count,
             'price' =>$allPrice,
             ];
 
-//        dd($data['content']);
         $pdf = PDF::loadView('pdf_view', ['data' => $data]);
-        return $pdf->download('Чек #'.$order->id.'.pdf');
+        return $pdf->download('Чек #'.$ordersId.'.pdf');
 
 //        dd($allPrice);
 //

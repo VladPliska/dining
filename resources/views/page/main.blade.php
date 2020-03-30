@@ -4,13 +4,17 @@
 <div class="setting">
     <a href="/admin">
         <i class="fas fa-cog"></i>
-    Налаштування
+        Налаштування
     </a>
 </div>
+@if(count($data)==0)
+    <h2 class ='ce'>Меню порожнє</h2>
+@else
 <h1 class="menu-title">Меню</h1>
+
 <div class="main">
-    @foreach($data as $v)
-        <span title="Інгрідієнти:{{$v->ingredients}}">
+        @foreach($data as $v)
+            <span title="Інгрідієнти:{{$v->ingredients}}">
         <div class="dish-item" data-id="{{$v->id}}">
             <div class="content-item">
                 <img src="./storage/Image/{{$v->img}}" alt="Фото страви" class="img-dish">
@@ -19,11 +23,13 @@
             </div>
         </div>
     </span>
-    @endforeach
+        @endforeach
 </div>
 <div class="confirm-order btn">
     Замовити
 </div>
+@endif
+
 
 
 @include('includes/footer')
