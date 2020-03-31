@@ -4,7 +4,8 @@
 
 <div class="login-container">
     <div class="title-login">Вхід</div>
-    <form action="/login" class="auth-form" method="POST">
+    <form action="{{route('auth')}}" class="auth-form" method="POST">
+        @csrf
         <div class="login">
             <label for="login">Введіть нік</label><br>
             <input id='login' type="text" name='username' placeholder="Введіть нік">

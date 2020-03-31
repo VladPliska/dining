@@ -19482,6 +19482,26 @@ $(document).on('click', '.editDish', function (e) {
     $('.id-dish').val(id);
   }
 });
+$(document).on('click', '.startSearch', function () {
+  var query = $(this).parent().find('input').val();
+  $.ajax({
+    type: 'POST',
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: '/search',
+    data: {
+      query: query
+    },
+    success: function success(res) {
+      if (res.success) {
+        $('.order-content').find('.content').html(res.view);
+      } else {
+        $('.order-content').find('.content').html('Empty');
+      }
+    }
+  });
+});
 
 /***/ }),
 

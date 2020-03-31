@@ -52,7 +52,7 @@
 <div class="all-dish-edit" hidden>
     <div class="search-edit">
         <input type="text" class="searchInEdit" placeholder="Введіть назву страви для пошуку">
-        <i class="fas fa-search"></i>
+        <i class="fas fa-search startSearch"></i>
     </div>
     <div class="order-content">
         <div class="orders">

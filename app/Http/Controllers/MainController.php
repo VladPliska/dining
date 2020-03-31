@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\models\Orders;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Menu;
 use PHPUnit\Exception;
@@ -58,6 +60,7 @@ class MainController extends Controller
     public function index(Request $req)
     {
         $data = Menu::all();
+
         return view('page/main', compact('data'));
     }
 
@@ -165,7 +168,9 @@ class MainController extends Controller
 
         try {
             Orders::where('menu_id', $id)->delete(); ///////NEED FIX
-            Menu::where('id', $id)->delete();
+            $dish = Menu::where('id', $id)->get();
+            Storage::disk('local')->delete('public/Image/' . $dish[0]->img);
+            $dish->delete();
             return response()->json([
                 'removed' => true
             ]);
@@ -222,23 +227,62 @@ class MainController extends Controller
 
         }
         if (count($updateArray)) {
-            try{
-                Menu::where('id',$id)->update($updateArray);
-            }catch (Exception $e){
+            try {
+                Menu::where('id', $id)->update($updateArray);
+            } catch (Exception $e) {
                 dd('errr');
             }
             $allMenu = Menu::all();
             return view('page/admin', ['success' => true, 'allMenu' => $allMenu]);
-        } else{
+        } else {
             //Nothing to update
         }
-
-
-
-
-
-
     }
 
+    public function searchDish(Request $req)
+    {
+
+        $query = $req->get('query');
+//        dd($query);
+
+        $data = Menu::where('name', 'ilike', '%' . $query . '%')->get();
+
+        if(count($data)){
+            $view = view('includes/edit-item', compact('data'))->render();
+
+            return response()->json([
+                'success' => true,
+                'view' => $view
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'view' => null
+            ]);
+        }
+    }
+
+    public function auth(Request $req){
+
+        $username = $req->get('username');
+        $pass = $req->get('pass');
+
+        $pass = hash('md5',$pass);
+
+        $user = User::where('name',$username)->where('password',$pass)->get();
+
+
+
+        if(count($user) != 0){
+            $rand = rand(mb_strlen($user[0]->email),200);
+            $authToken = hash('md5',$rand);
+            $user[0]->update(['remember_token'=>$authToken]);
+
+            Cookie::queue('auth',$authToken, 60*30 );
+        }else{
+            /// ERR
+        }
+            return redirect('/admin');
+    }
 }
 

@@ -1,18 +1,20 @@
 @include('includes/head')
 
 @include('includes/header')
-<div class="setting">
-    <a href="/admin">
-        <i class="fas fa-cog"></i>
-        Налаштування
-    </a>
-</div>
+@if($auth)
+    <div class="setting">
+        <a href="/admin">
+            <i class="fas fa-cog"></i>
+            Налаштування
+        </a>
+    </div>
+@endif
 @if(count($data)==0)
-    <h2 class ='ce'>Меню порожнє</h2>
+    <h2 class='ce'>Меню порожнє</h2>
 @else
-<h1 class="menu-title">Меню</h1>
+    <h1 class="menu-title">Меню</h1>
 
-<div class="main">
+    <div class="main">
         @foreach($data as $v)
             <span title="Інгрідієнти:{{$v->ingredients}}">
         <div class="dish-item" data-id="{{$v->id}}">
@@ -24,10 +26,10 @@
         </div>
     </span>
         @endforeach
-</div>
-<div class="confirm-order btn">
-    Замовити
-</div>
+    </div>
+    <div class="confirm-order btn">
+        Замовити
+    </div>
 @endif
 
 

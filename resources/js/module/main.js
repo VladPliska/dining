@@ -147,3 +147,24 @@ $(document).on('click','.editDish',function(e){
 });
 
 
+$(document).on('click','.startSearch',function(){
+    let query = $(this).parent().find('input').val();
+
+    $.ajax({
+        type:'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url:'/search',
+        data:{query},
+        success:function(res){
+            if(res.success){
+                $('.order-content').find('.content').html(res.view);
+            }else{
+                $('.order-content').find('.content').html('Empty');
+            }
+
+        }
+    });
+})
+
