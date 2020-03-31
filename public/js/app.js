@@ -19358,6 +19358,11 @@ $(document).on('click', '.countUp', function () {
   $(this).parent().find('.countVal').attr('value', count + 1);
   elPrice.text(price + priceDish);
 });
+$(document).on('change', 'input[type="number"]', function (e) {
+  if ($(this).val() <= 0) {
+    $(this).val(1);
+  }
+});
 $(document).on('click', '.countDown', function () {
   var elPrice = $(this).parent().parent().find('.price');
   var el = $(this).parent().find('.count');

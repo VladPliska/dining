@@ -21,6 +21,13 @@ $(document).on('click', '.countUp', function () {
     elPrice.text(price + priceDish);
 })
 
+$(document).on('change','input[type="number"]',function(e){
+    if($(this).val() <= 0 ){
+        $(this).val(1);
+    }
+})
+
+
 $(document).on('click', '.countDown', function () {
     let elPrice = $(this).parent().parent().find('.price');
     let el = $(this).parent().find('.count');
