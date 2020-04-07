@@ -165,12 +165,12 @@ class MainController extends Controller
     {
 
         $id = $req->get('id');
+        $dish = Menu::where('id', $id)->get();
 
         try {
             Orders::where('menu_id', $id)->delete(); ///////NEED FIX
-            $dish = Menu::where('id', $id)->get();
+            Menu::where('id', $id)->delete();
             Storage::disk('local')->delete('public/Image/' . $dish[0]->img);
-            $dish->delete();
             return response()->json([
                 'removed' => true
             ]);
@@ -270,8 +270,6 @@ class MainController extends Controller
         $pass = hash('md5',$pass);
 
         $user = User::where('name',$username)->where('password',$pass)->get();
-
-
 
         if(count($user) != 0){
             $rand = rand(mb_strlen($user[0]->email),200);
