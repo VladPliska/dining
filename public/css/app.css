@@ -53,10 +53,10 @@ body::-webkit-scrollbar {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  width: calc(100%/4)px;
+  width: calc(100%/3)px;
   border: 1px solid #b68e48;
   font-size: 20px;
-  height: 320px;
+  height: 270px;
   margin: 3px;
   border-radius: 10px;
 }
@@ -79,8 +79,8 @@ body::-webkit-scrollbar {
 
 .main .dish-item .content-item img {
   border-radius: 10px;
-  width: 350px;
-  height: 200px;
+  width: 250px;
+  height: 150px;
 }
 
 .main .dish-item:hover {
@@ -261,7 +261,7 @@ a {
 .header-menu-btn {
   position: absolute;
   font-size: 30px;
-  left: 250px;
+  left: 150px;
   top: 10px;
   display: inline-block;
   padding: 20px;
@@ -295,6 +295,7 @@ textarea {
 }
 
 .create-new-dish {
+  margin-top: 100px;
   width: 80%;
   position: absolute;
   top: 45%;

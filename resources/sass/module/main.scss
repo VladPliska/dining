@@ -17,6 +17,7 @@ body {
     outline: unset;
 }
 
+
 .header h1 {
     width: 100%;
     height: 100px;
@@ -50,10 +51,10 @@ body {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr;
-        width: calc(100%/4)+px;
+        width: calc(100%/3)+px;
         border: 1px solid #b68e48;
         font-size: 20px;
-        height: 320px;
+        height: 270px;
         margin: 3px;
         border-radius: 10px;
 
@@ -74,8 +75,8 @@ body {
 
             img {
                 border-radius: 10px;
-                width: 350px;
-                height: 200px;
+                width: 250px;
+                height: 150px;
             }
 
             //.price-dish{
@@ -276,7 +277,7 @@ a{
 .header-menu-btn{
     position: absolute;
     font-size: 30px;
-    left: 250px;
+    left: 150px;
     top: 10px;
     display: inline-block;
     padding: 20px;
