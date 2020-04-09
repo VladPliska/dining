@@ -170,12 +170,17 @@ textarea {
             }
         }
     }
-.admin-title-orders,.admin-order-item{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr 1fr 1fr ;
+.admin-title-orders,.admin-order-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
     font-size: 25px;
 }
+    .admin-title-orders{
+    div{
+        white-space: nowrap;
+    }
+    }
     .admin-order-item{
         cursor: pointer;
         img{

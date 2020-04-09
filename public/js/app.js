@@ -19380,7 +19380,7 @@ $(document).on('click', '.countDown', function () {
 $(document).on('click', '.remove-dish', function () {
   $(this).parent().remove();
 
-  if ($('.content').children().length == 0) {
+  if ($('.content').children().find('form').length == 0) {
     $('.submitOrder').remove();
     location.reload();
   }
@@ -19502,7 +19502,7 @@ $(document).on('click', '.startSearch', function () {
       if (res.success) {
         $('.order-content').find('.content').html(res.view);
       } else {
-        $('.order-content').find('.content').html('Empty');
+        $('.order-content').find('.content').html('Нічого не знайдено');
       }
     }
   });
